@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPHOUSE - Tela de Avaliação</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Cores principais */
+        :root {
+            --verde-claro: #4CAF50;
+            --verde-escuro: #2F6A2F;
+            --branco: #FFFFFF;
+            --cinza-claro: #F1F1F1;
+            --cinza-escuro: #444;
+            --azul-claro: #007BFF;
+            --azul-escuro: #0056B3;
+            --preto: #333;
+            --cinza: #6c757d;
+        }
+
+        header {
+            width: 100%;
+            text-align: center;
+            background-color: var(--verde-claro);
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--cinza-claro);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin-top: 80px;
+            width: 100%;
+        }
+
+        .form-container {
+            background-color: var(--branco);
+            border-radius: 12px;
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: var(--verde-escuro);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .stars i {
+            font-size: 2rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .stars i.active,
+        .stars i:hover {
+            color: var(--verde-claro);
+        }
+
+        /* Estilos do campo de comentário */
+        .comentario-container {
+            margin-bottom: 20px;
+        }
+
+        .comentario-container label {
+            font-size: 1.1rem;
+            color: var(--verde-escuro);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .comentario-container textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-container button {
+            background-color: var(--verde-claro);
+            font-size: 1.2rem;
+            padding: 14px;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .form-container button:hover {
+            background-color: var(--verde-escuro);
+            transform: translateY(-2px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <h1>APPHOUSE - Avaliação</h1>
+    </header>
+
+    <!-- Formulário de Avaliação -->
+    <div id="avaliacao" class="form-container">
+        <h3>Avalie o Produto/Serviço</h3>
+
+        <!-- Avaliação por estrelas -->
+        <div class="stars">
+            <i class="fas fa-star" data-value="1"></i>
+            <i class="fas fa-star" data-value="2"></i>
+            <i class="fas fa-star" data-value="3"></i>
+            <i class="fas fa-star" data-value="4"></i>
+            <i class="fas fa-star" data-value="5"></i>
+        </div>
+
+        <!-- Campo de comentário -->
+        <div class="comentario-container">
+            <label for="comentario">Comentário (opcional):</label>
+            <textarea id="comentario" placeholder="Deixe seu comentário aqui..."></textarea>
+        </div>
+
+        <button onclick="enviarAvaliacao()">Enviar Avaliação</button>
+    </div>
+
+    <script>
+        // Variáveis
+        let stars = document.querySelectorAll('.stars i');
+        let rating = 0;  // Avaliação selecionada pelo usuário
+
+        // Adicionar eventos de clique nas estrelas
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                rating = this.getAttribute('data-value');
+                updateStars();
+            });
+
+            star.addEventListener('mouseover', function() {
+                let currentValue = this.getAttribute('data-value');
+                highlightStars(currentValue);
+            });
+
+            star.addEventListener('mouseleave', function() {
+                updateStars();
+            });
+        });
+
+        // Atualizar a cor das estrelas de acordo com a avaliação
+        function updateStars() {
+            stars.forEach(star => {
+                if (star.getAttribute('data-value') <= rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Destacar estrelas enquanto o mouse passa sobre elas
+        function highlightStars(value) {
+            stars.forEach(star => {
+                if (star.getAttribute('data-value') <= value) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Função para enviar a avaliação
+        function enviarAvaliacao() {
+            if (rating === 0) {
+                alert('Por favor, selecione uma nota!');
+                return;
+            }
+
+            const comentario = document.getElementById('comentario').value;
+
+            // Aqui você pode enviar os dados para um servidor, por exemplo
+            // No momento, vamos apenas exibir uma mensagem de sucesso
+            alert('Avaliação enviada com sucesso!');
+
+            // Limpar campos após o envio
+            document.getElementById('comentario').value = '';
+            rating = 0;
+            updateStars();
+        }
+    </script>
+
+</body>
+</html>
