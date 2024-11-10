@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPHOUSE - Plataforma do Motorista</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Cores principais */
+        :root {
+            --verde-claro: #4CAF50;
+            --verde-escuro: #2F6A2F;
+            --branco: #FFFFFF;
+            --cinza-claro: #F1F1F1;
+            --cinza-escuro: #444;
+            --azul-claro: #007BFF;
+            --azul-escuro: #0056B3;
+            --preto: #333;
+            --cinza: #6c757d;
+        }
+
+        header {
+        width: 100%;
+        text-align: center;
+        background-color: var(--verde-claro);
+        padding: 20px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        position: fixed; /* Título fixo no topo */
+        top: 0;
+        left: 0;
+        z-index: 10; /* Garante que o título esteja acima de outros conteúdos */
+}
+
+        header h1 {
+             color: white;
+            font-size: 2.5rem;
+            font-weight: 600;
+}
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--cinza-claro);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin-top: 80px; /* Adiciona espaçamento para que o conteúdo comece abaixo do título */
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Cabeçalho */
+        header {
+            width: 100%;
+            text-align: center;
+            background-color: var(--verde-claro);
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        /* Formulário de Login */
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: var(--verde-escuro);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--verde-claro);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--verde-escuro);
+            transform: translateY(-2px);
+        }
+
+        /* Estilo para as telas de cadastro */
+        .form-container {
+            background-color: var(--branco);
+            border-radius: 12px;
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        h3 {
+            color: var(--verde-escuro);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: var(--verde-claro);
+            font-size: 1.2rem;
+            padding: 14px;
+        }
+
+        .form-container button:hover {
+            background-color: var(--verde-escuro);
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            background-color: var(--azul-claro);
+            color: white;
+            font-size: 1rem;
+            padding: 12px;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+ /* Estilo para a logomarca */
+.logo {
+    max-width: 150px; /* Ajuste o tamanho da imagem conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Garante que a imagem seja tratada como um bloco */
+    margin: 0 auto 20px; /* Centraliza a imagem e adiciona margem inferior */
+}
+
+
+        .button-secondary:hover {
+            background-color: var(--azul-escuro);
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .login-container, .form-container {
+                width: 90%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <h1>APPHOUSE - Plataforma do vendedor</h1>
+    </header>
+
+    <!-- Tela de Login -->
+    <div id="loginScreen" class="login-container">
+        <img src="Gemini_Generated_Image_4y0mk34y0mk34y0m.png.jpg" alt="Logo AppHouse" class="logo">
+        <h2>Login</h2>
+        <input type="email" id="email" class="input-field" placeholder="E-mail" required>
+        <input type="password" id="senha" class="input-field" placeholder="Senha" required>
+        <button onclick="login()">Entrar</button>
+    </div>
+
+    <!-- Tela de Cadastro de Marcas e Modelos de Acessórios -->
+    <div id="cadastroAcessorios" class="form-container" style="display:none;">
+        <h3>Cadastro de Produtos</h3>
+        <input type="text" id="marca" placeholder="Marca do produto" class="input-field">
+        <input type="text" id="modelo" placeholder="Modelo do produto" class="input-field">
+        
+        <!-- Seleção de Categoria -->
+        <select id="categoria" class="input-field">
+            <option value="">Selecione a Categoria</option>
+            <option value="informatica">Informática</option>
+            <option value="manutencao">Manutenção</option>
+            <option value="outros">Outros</option>
+        </select>
+
+        <button onclick="cadastrarMarcaModelo()">Cadastrar Marca/Modelo</button>
+    </div>
+
+    <!-- Tela de Cadastro de Modelos de Veículos -->
+    <div id="cadastroVeiculoModelo" class="form-container" style="display:none;">
+        <h3>Cadastro de Modelos de Veículos</h3>
+        <input type="text" id="modeloVeiculo" placeholder="Modelo do Veículo" class="input-field">
+        <button onclick="cadastrarModeloVeiculo()">Cadastrar Modelo</button>
+    </div>
+
+    <!-- Tela de Cadastro de Veículos de Clientes -->
+    <div id="cadastroVeiculoCliente" class="form-container" style="display:none;">
+        <h3>Cadastro de Veículo de Cliente</h3>
+        <input type="text" id="placa" placeholder="Placa do Veículo" class="input-field">
+        <input type="text" id="modeloCliente" placeholder="Nome do Cliente" class="input-field">
+        <button onclick="cadastrarVeiculoCliente()">Cadastrar Veículo</button>
+    </div>
+
+    <!-- Tela de Cadastro de Vendedores -->
+    <div id="cadastroVendedor" class="form-container" style="display:none;">
+        <h3>Cadastro de Vendedores</h3>
+        <input type="text" id="nomeVendedor" placeholder="Nome do Vendedor" class="input-field">
+        <input type="text" id="emailVendedor" placeholder="E-mail do Vendedor" class="input-field">
+        <button onclick="cadastrarVendedor()">Cadastrar Vendedor</button>
+    </div>
+
+    <!-- Tela de Finalização de Venda -->
+    <div id="finalizarVenda" class="form-container" style="display:none;">
+        <h3>Produto Registrado com Sucesso!</h3>
+        <p>Você registrou o produto com sucesso! Deseja realizar outra venda?</p>
+        <p><strong>Protocólo de Venda: </strong><span id="protocolo"></span></p>
+        <button class="button-secondary" onclick="realizarOutraVenda()">Realizar outra venda</button>
+    </div>
+
+    <script>
+        // Função de Login
+        function login() {
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            if (email === '' || senha === '') {
+                alert('Preencha todos os campos!');
+                return;
+            }
+
+            // Simulando sucesso no login e redirecionando para as telas de cadastro
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('cadastroAcessorios').style.display = 'block';
+        }
+
+        // Função de Cadastro de Marcas e Modelos de Acessórios
+        function cadastrarMarcaModelo() {
+            const marca = document.getElementById('marca').value;
+            const modelo = document.getElementById('modelo').value;
+            const categoria = document.getElementById('categoria').value;
+
+            if (marca === '' || modelo === '' || categoria === '') {
+                alert('Preencha todos os campos!');
+                return;
+            }
+
+            alert('Marca e Modelo cadastrados com sucesso!');
+            document.getElementById('cadastroAcessorios').style.display = 'none';
+            document.getElementById('cadastroVeiculoModelo').style.display = 'block';
+        }
+
+        // Função de Cadastro de Modelos de Veículos
+        function cadastrarModeloVeiculo() {
+            const modeloVeiculo = document.getElementById('modeloVeiculo').value;
+
+            if (modeloVeiculo === '') {
+                alert('Preencha todos os campos!');
+                return;
+            }
+
+            alert('Modelo de Veículo cadastrado com sucesso!');
+            document.getElementById('cadastroVeiculoModelo').style.display = 'none';
+            document.getElementById('cadastroVeiculoCliente').style.display = 'block';
+        }
+
+        // Função de Cadastro de Veículos de Clientes
+        function cadastrarVeiculoCliente() {
+            const placa = document.getElementById('placa').value;
+            const modeloCliente = document.getElementById('modeloCliente').value;
+
+            if (placa === '' || modeloCliente === '') {
+                alert('Preencha todos os campos!');
+                return;
+            }
+
+            alert('Veículo de Cliente cadastrado com sucesso!');
+            document.getElementById('cadastroVeiculoCliente').style.display = 'none';
+            document.getElementById('cadastroVendedor').style.display = 'block';
+        }
+
+        // Função de Cadastro de Vendedores
+        function cadastrarVendedor() {
+            const nomeVendedor = document.getElementById('nomeVendedor').value;
+            const emailVendedor = document.getElementById('emailVendedor').value;
+
+            if (nomeVendedor === '' || emailVendedor === '') {
+                alert('Preencha todos os campos!');
+                return;
+            }
+
+            alert('Vendedor cadastrado com sucesso!');
+            document.getElementById('cadastroVendedor').style.display = 'none';
+            document.getElementById('finalizarVenda').style.display = 'block';
+
+            // Gerar o protocolo e exibir
+            const protocolo = gerarProtocolo();
+            document.getElementById('protocolo').innerText = protocolo;
+        }
+
+        // Função para gerar o protocolo de 6 dígitos
+        function gerarProtocolo() {
+            return Math.floor(100000 + Math.random() * 900000);  // Gera um número aleatório entre 100000 e 999999
+        }
+
+        // Função de realizar outra venda
+        function realizarOutraVenda() {
+            document.getElementById('finalizarVenda').style.display = 'none';
+            document.getElementById('cadastroAcessorios').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
